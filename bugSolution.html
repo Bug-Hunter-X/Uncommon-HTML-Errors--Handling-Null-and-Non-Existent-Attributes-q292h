@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Error Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <div id="myDiv2"></div>
+  <script>
+    //Properly handling a null attribute
+    let myAttribute = document.getElementById("myDiv").getAttribute("nonExistentAttribute");
+    if (myAttribute === null) {
+      console.log("Attribute 'nonExistentAttribute' does not exist.");
+    } else {
+      console.log(myAttribute);
+    }
+
+    //Properly handling a null object before using methods
+    let myElement = document.getElementById("myElementThatDoesNotExist");
+    if(myElement){
+        myElement.addEventListener("click", function(){
+            console.log("Clicked");
+        });
+    }else{
+        console.error("Element not found");
+        //create the element
+        const newDiv = document.createElement("div");
+        newDiv.id = "myElementThatDoesNotExist";
+        document.body.appendChild(newDiv);
+        //add event listener
+        newDiv.addEventListener("click", function(){
+            console.log("Clicked");
+        });
+    }
+
+     //Another common error:  Trying to use innerHTML on a null element
+     let myElement2 = document.getElementById("myDiv2");
+     if(myElement2){
+        myElement2.innerHTML = "<p>This content is added dynamically.</p>";
+     }else{
+        console.error("Element not found");
+     }
+
+  </script>
+</body>
+</html>
